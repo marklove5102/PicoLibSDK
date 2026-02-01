@@ -1,0 +1,69 @@
+Formáty videomódù:
+(ale nemám už pøehled o polaritách signálù, co je svìtlo a co tma)
+
+// input pins
+#define PIN_V1		2	// V1 (normal state: 0 black, 1 white)
+#define PIN_V2		3	// V2 (normal state: 0 black, 1 white)
+
+bit 0: V1 (to je nižší bit šedé úrovnì)
+bit 1: V2 (to je vyšší bit šedé úrovnì)
+
+1) 640x600, 1 bit per pixel, B&W levels
+   bit 7 je první pixel vlevo, bit 0 je poslední pixel vpravo
+   Bity z V1 (nižší bit) jdou do první linky, bity z V2 (vyšší bit) do druhé linky
+
+   1. linka: B7 B6 B5 B4 B3 B2 B1 B0
+             V1 V1 V1 V1 V1 V1 V1 V1
+
+   2. linka: B7 B6 B5 B4 B3 B2 B1 B0
+             V2 V2 V2 V2 V2 V2 V2 V2
+
+2) 640x300, 2 bits per pixel, 4 gray levels
+   bit 7 a 6 je první pixel vlevo, bit 1 a 0 je poslední pixel vpravo
+
+   B7 B6 - b5 B4 - B3 B2 - B1 B0
+   V2 V1 - V2 V1 - V2 V1 - V2 V1
+
+3) 640x300, 2 bits per pixel, colors black/blue/red/white
+   - podobné jako 2), místo úrovní šedé jsou barvy 0=èerná, 1=modrá, 2=èervená, 3=bílá
+
+4) 640x300, 2 bits per pixel, colors black/green/red/yellow
+   - podobné jako 2), místo úrovní šedé jsou barvy 0=èerná, 1=zelená, 2=èervená, 3=žlutá
+
+5) 320x300, 4 bits per pixel, 16 gray levels
+   Bity V1 a V2 z prvního pixelu definují vyšší 2 bity úrovnì šedé,
+   bity V1 a V2 z druhého pixelu definují nižší 2 bity úrovnì šedé.
+
+          1. pixel              2. pixel
+    B7   B6   B5   B4   -   B3   B2   B1   B0
+   V2-1 V1-1 V2-2 V1-2  -  V2-1 V1-1 V2-2 V1-2
+  
+6) 320x300, 4 bits per pixel, 16 colors in format YRGB1111
+   Podobné jako 5), ale místo 16 úrovní šedé je tabulka barev:
+     bit 3 (= vyšší bit V2 z prvního pixelu) je jasová složka (zvýšený jas barvy),
+     bit 2 (= nižší bit V1 z prvního pixelu) je èervená složka,
+     bit 1 (= vyšší bit V2 z druhého pixelu) je zelená složka,
+     bit 0 (= nižší bit V1 z druhého pixelu) je modrá složka.
+
+7) 320x150, 8 bits per pixel, 256 colors in format RGB332
+   2 pixely z první linky (oznaèené 'A') definují horní 4 bity barvy,
+   2 pixely z druhé linky (oznaèené 'B') definují dolní 4 bity barvy pixelu:
+
+       èervená 0..7         zelená 0..7      modrá 0..3
+      B7    B6    B5      B4    B3    B2      B1    B0
+     V2-1A V1-1A V2-2A   V1-2A V2-1B V1-1B   V2-2B V1-2B
+
+8) 160x300, 8 bits per pixel, 256 colors in format RGB332
+   Bity V1 a V2 ze 4 po sobì následujících pixelù definují barevné složky 1 pixelu:
+
+      èervená 0..7      zelená 0..7   modrá 0..3
+      B7   B6   B5     B4   B3   B2    B1   B0
+     V2-1 V1-1 V2-2   V1-2 V2-3 V1-3  V2-4 V1-4
+
+9) 160x150, 16 bits per pixel, format RGB565
+   4 pixely z první linky (oznaèené 'A') definují dolních 8 bitù barevných složek,
+   4 pixely z druhé linky (oznaèené 'B') definují horních 8 bitù barevných složek:
+
+        èervená 0..31                           zelená 0..63                     modrá 0..31
+    B15   B14   B13   B12   B11      B10   B09   B08   B07   B06   B05     B04   B03   B02   B01   B00
+   V2-1B V1-1B V2-2B V1-2B V2-3B    V1-3B V2-4B V1-4B V2-1A V1-1A V2-2A   V1-2A V2-3A V1-3A V2-4A V1-4A

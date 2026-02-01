@@ -1,6 +1,5 @@
 @echo off
 _RaspPicoImg	font_bold_8x8.bmp	font_bold_8x8.c		FontBold8x8
-_RaspPicoImg	font_bold_8x8.bmp	font_bold_8x8.c		FontBold8x8
 _RaspPicoImg	font_bold_8x14.bmp	font_bold_8x14.c	FontBold8x14
 _RaspPicoImg	font_bold_8x16.bmp	font_bold_8x16.c	FontBold8x16
 _RaspPicoImg	font_boldB_8x14.bmp	font_boldB_8x14.c	FontBoldB8x14

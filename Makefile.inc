@@ -313,6 +313,9 @@ CFLAGS += -funsigned-char
 # generate debug informations
 #CFLAGS += -g3
 
+# Report if function does not return value
+CFLAGS += -Wreturn-type
+
 # warning as errors
 CFLAGS += -Werror
 

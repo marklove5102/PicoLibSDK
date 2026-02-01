@@ -201,7 +201,7 @@ INLINE void* ClrThumbBit(void* addr) { return (void*)(((u32)addr) & (u32)~1); }
 // - can be used to set exception handlers (irq < 0)
 INLINE void SetHandler(int irq, irq_handler_t handler) { cb(); GetVTOR()[VTABLE_FIRST_IRQ + irq] = handler; dmb(); }
 
-// get current interrupt servie handler (irq = interrupt request indice IRQ_*, negative exception numbers can also be used)
+// get current interrupt service handler (irq = interrupt request indice IRQ_*, negative exception numbers can also be used)
 INLINE irq_handler_t GetHandler(int irq) { return GetVTOR()[VTABLE_FIRST_IRQ + irq]; }
 
 // clear pending interrupts of NVIC masked of this CPU core (bit 0.. = IRQ 0..)

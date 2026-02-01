@@ -1040,7 +1040,7 @@ void ClearApp()
 	// display info
 	DispBigInfo("Erasing...");
 
-	// find end of memory (last 4 KB are reserver for config)
+	// find end of memory (last 4 KB are reserved for config)
 	u32 addr = XIP_BASE + BOOTLOADER_SIZE;
 	u32 count = FLASHSIZE - 4096 - BOOTLOADER_SIZE;
 	const u32* s = (const u32*)(addr + count);
